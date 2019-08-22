@@ -1,6 +1,4 @@
-default: buildAndOpen
-
-buildAndOpen: build open
+default: build
 
 
 build: resume.pdf
