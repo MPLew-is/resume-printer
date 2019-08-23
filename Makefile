@@ -2,6 +2,11 @@
 default: build
 
 
+.PHONY: setup
+setup:
+	@brew bundle
+
+
 .PHONY: build
 build: resume.pdf
 
