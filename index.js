@@ -13,7 +13,8 @@ const puppeteer = require('puppeteer');
 			right: "0.25in",
 			bottom: "0.25in",
 			left: "0.25in",
-		}
+		},
+		pageRanges: '1'
 	});
 
 	await browser.close();
