@@ -9,10 +9,10 @@ const puppeteer = require('puppeteer');
 	await page.pdf({
 		path: 'resume.pdf',
 		margin: {
-			top: "0.25in",
-			right: "0.25in",
-			bottom: "0.25in",
 			left: "0.25in",
+			right: "0.25in",
+			top: "0.25in",
+			bottom: "0.5in",
 		},
 		pageRanges: '1'
 	});
