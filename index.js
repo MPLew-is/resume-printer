@@ -7,7 +7,7 @@ const puppeteer = require('puppeteer');
 		waitUntil: 'networkidle2'
 	});
 	await page.pdf({
-		path: 'resume.pdf',
+		path: 'Michael P. Lewis, Jr.pdf',
 		margin: {
 			left: "0.25in",
 			right: "0.25in",

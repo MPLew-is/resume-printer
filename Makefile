@@ -8,17 +8,17 @@ setup:
 
 
 .PHONY: build
-build: resume.pdf
+build: Michael\ P.\ Lewis,\ Jr.pdf
 
-resume.pdf: resume.html resume.css
+Michael\ P.\ Lewis,\ Jr.pdf: resume.html resume.css index.js
 	@npm start --silent
 
 
 .PHONY: open
-open: | resume.pdf
-	@open resume.pdf
+open: | Michael\ P.\ Lewis,\ Jr.pdf
+	@open "Michael P. Lewis, Jr.pdf"
 
 
 .PHONY: clean
 clean:
-	@rm resume.pdf
+	@rm "Michael P. Lewis, Jr.pdf"
