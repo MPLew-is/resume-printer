@@ -17,3 +17,8 @@ resume.pdf: resume.html resume.css
 .PHONY: open
 open: | resume.pdf
 	@open resume.pdf
+
+
+.PHONY: clean
+clean:
+	@rm resume.pdf
