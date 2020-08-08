@@ -7,3 +7,6 @@
 
 # Ignore built files.
 /.build
+
+# Ignore user-specific source files.
+/Sources

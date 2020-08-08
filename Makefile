@@ -64,7 +64,7 @@ PDF_PATH_ESCAPED := "${BUILD_DIRECTORY}"/${PDF_FILENAME}
 build: ${PDF_PATH}
 
 # Build the PDF using the node program.
-${PDF_PATH}: resume.html resume.css index.js | ${BUILD_DIRECTORY}
+${PDF_PATH}: Sources/resume.html Sources/resume.css index.js | ${BUILD_DIRECTORY}
 	@"${NPM}" start --silent "${<}" ${PDF_PATH_ESCAPED}
 
 
