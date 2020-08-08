@@ -54,18 +54,22 @@ ${BREW}:
 
 # Centralize definition of the built PDF's filename, defaulting to your user account name.
 # If you override this, ensure any spaces are escaped with backslashes; quotes are not sufficient as `make` interprets them differently whether they're in the target definition or the rules body.
-PDF_FILENAME     := $(shell whoami).pdf
-PDF_PATH         := ${BUILD_DIRECTORY}/${PDF_FILENAME}
-PDF_PATH_ESCAPED := "${BUILD_DIRECTORY}"/${PDF_FILENAME}
+PDF_FILENAME      := $(shell whoami).pdf
+PDF_PATH          := ${BUILD_DIRECTORY}/${PDF_FILENAME}
+PDF_PATH_ESCAPED  := "${BUILD_DIRECTORY}"/${PDF_FILENAME}
 
+# Centralize definition of the source files for cleanliness and external overriding.
+SOURCE_DIRECTORY  := Sources
+SOURCE_FILES      := $(shell find "${SOURCE_DIRECTORY}" -name '*.html') $(shell find "${SOURCE_DIRECTORY}" -name '*.css')
+SOURCE_ENTRYPOINT := ${SOURCE_DIRECTORY}/resume.html
 
 # Provide a shortcut target to build the PDF.
 .PHONY: build
 build: ${PDF_PATH}
 
 # Build the PDF using the node program.
-${PDF_PATH}: Sources/resume.html Sources/resume.css index.js | ${BUILD_DIRECTORY}
-	@"${NPM}" start --silent "${<}" ${PDF_PATH_ESCAPED}
+${PDF_PATH}: ${SOURCE_FILES} index.js | ${BUILD_DIRECTORY}
+	@"${NPM}" start --silent "${SOURCE_ENTRYPOINT}" ${PDF_PATH_ESCAPED}
 
 
 # Open the PDF for viewing in the OS-registered viewer.
