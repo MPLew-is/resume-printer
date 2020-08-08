@@ -67,7 +67,7 @@ HTML_ENTRYPOINT   := ${SOURCE_DIRECTORY}/resume.html
 build: ${PDF_PATH}
 
 # Build the PDF using the node program.
-${PDF_PATH}: ${SOURCE_FILES} index.js | ${BUILD_DIRECTORY}
+${PDF_PATH}: ${SOURCE_FILES} index.js ${NPM_INSTALLATION_RECEIPT} | ${BUILD_DIRECTORY}
 	@"${NPM}" start --silent "${HTML_ENTRYPOINT}" ${PDF_PATH}
 
 
