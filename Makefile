@@ -43,7 +43,7 @@ ${NPM_INSTALLATION_RECEIPT}: package-lock.json package.json | ${BUILD_DIRECTORY}
 # If you don't want to use Homebrew, make sure `npm` is either on your `PATH` or the location is provided via the `NPM` variable (`make NPM=/path/to/npm`).
 ${NPM}: Brewfile.lock.json
 
-#
+# Generate the Homebrew lock file from the list of dependencies, which installs them.
 Brewfile.lock.json: Brewfile
 	@"${BREW}" bundle
 
