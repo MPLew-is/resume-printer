@@ -8,6 +8,7 @@
 	"author": "Mike Lewis <mike@mplew.is>",
 	"license": "ISC",
 	"dependencies": {
-		"puppeteer": "^1.19.0"
+		"puppeteer": "^1.19.0",
+		"single-line-log": "^1.1.2"
 	}
 }
