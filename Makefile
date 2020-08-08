@@ -78,3 +78,6 @@ open: ${PDF_PATH}
 .PHONY: clean
 clean:
 	@rm -rf "${BUILD_DIRECTORY}"
+	@rm -rf node_modules
+	@rm -f Brewfile.lock.json
+
