@@ -16,7 +16,8 @@
  * ```
  */
 
-const puppeteer = require("puppeteer");
+const path          = require('path');
+const puppeteer     = require("puppeteer");
 const singleLineLog = require("single-line-log");
 
 // The first 2 arguments are "node" and the filename being run, so strip them off for ease of use.
@@ -29,8 +30,17 @@ const arguments = process.argv.slice(2);
 	const page = await browser.newPage();
 
 	const document = arguments[0]
+	// Chromium isn't working-directory-aware, so prefix the document input with the working directory if needed.
+	var document_absolute
+	if (path.isAbsolute(document)) {
+		document_absolute = document
+	}
+	else {
+		document_absolute = `${process.cwd()}/${document}`
+	}
+
 	singleLineLog.stderr(`Navigating to '${document}' (2/4)`)
-	await page.goto(`file:///${process.cwd()}/${document}`, {
+	await page.goto(`file:///${document_absolute}`, {
 		waitUntil: "networkidle2"
 	});
 

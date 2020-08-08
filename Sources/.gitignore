@@ -1,0 +1,3 @@
+# Ignore everything in this directory except for this file; we want the directory to exist for quick-start purposes but don't want to track any of the content.
+/**
+!/.gitignore

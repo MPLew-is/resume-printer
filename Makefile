@@ -56,12 +56,11 @@ ${BREW}:
 # If you override this, ensure any spaces are escaped with backslashes; quotes are not sufficient as `make` interprets them differently whether they're in the target definition or the rules body.
 PDF_FILENAME      := $(shell whoami).pdf
 PDF_PATH          := ${BUILD_DIRECTORY}/${PDF_FILENAME}
-PDF_PATH_ESCAPED  := "${BUILD_DIRECTORY}"/${PDF_FILENAME}
 
 # Centralize definition of the source files for cleanliness and external overriding.
 SOURCE_DIRECTORY  := Sources
 SOURCE_FILES      := $(shell find "${SOURCE_DIRECTORY}" -name '*.html') $(shell find "${SOURCE_DIRECTORY}" -name '*.css')
-SOURCE_ENTRYPOINT := ${SOURCE_DIRECTORY}/resume.html
+HTML_ENTRYPOINT   := ${SOURCE_DIRECTORY}/resume.html
 
 # Provide a shortcut target to build the PDF.
 .PHONY: build
@@ -69,13 +68,13 @@ build: ${PDF_PATH}
 
 # Build the PDF using the node program.
 ${PDF_PATH}: ${SOURCE_FILES} index.js | ${BUILD_DIRECTORY}
-	@"${NPM}" start --silent "${SOURCE_ENTRYPOINT}" ${PDF_PATH_ESCAPED}
+	@"${NPM}" start --silent "${HTML_ENTRYPOINT}" ${PDF_PATH}
 
 
 # Open the PDF for viewing in the OS-registered viewer.
 .PHONY: open
 open: ${PDF_PATH}
-	@"${OPEN}" ${PDF_PATH_ESCAPED}
+	@"${OPEN}" ${PDF_PATH}
 
 
 # Clean up all built files.
