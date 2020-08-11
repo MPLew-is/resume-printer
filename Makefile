@@ -21,21 +21,23 @@ NPM  = $(shell which npm  || echo "${BREW_PREFIX}/npm")
 
 
 # Centralize some common definitions.
-BUILD_DIRECTORY          := .build
-NPM_INSTALLATION_RECEIPT := ${BUILD_DIRECTORY}/package-lock.json
+SETUP_DIRECTORY          := .build
+BUILD_DIRECTORY          := ${SETUP_DIRECTORY}
+NPM_INSTALLATION_RECEIPT := ${SETUP_DIRECTORY}/package-lock.json
 
 # Provide a shortcut target to install dependencies.
 .PHONY: setup
 setup: ${NPM_INSTALLATION_RECEIPT} Brewfile.lock.json
 
-# Create the build directory.
-${BUILD_DIRECTORY}:
+# Create the build/setup directories.
+# These are separate rules to allow a repository-internal directory for the installation receipt but still allow the built PDF to be redirected to another directory.
+${BUILD_DIRECTORY} ${SETUP_DIRECTORY}:
 	@mkdir -p "${@}"
 
 # Install dependencies from stored bundle file and create an installation "receipt" file.
 # This file is separate from "package-lock.json" to force dependency installation at least once; otherwise, on a fresh clone of the repository the timestamps may all be the same and `make` will think everything is up to date.
 # The content of this file is unimportant (only its existence and timestamp), but by reusing the contents of `package-lock.json` there's at least some evidence of what its purpose is.
-${NPM_INSTALLATION_RECEIPT}: package-lock.json package.json | ${BUILD_DIRECTORY} ${NPM}
+${NPM_INSTALLATION_RECEIPT}: package-lock.json package.json | ${SETUP_DIRECTORY} ${NPM}
 	@"${NPM}" install
 	@cp -f "${<}" "${@}"
 	@touch "${@}"
@@ -83,6 +85,7 @@ open: ${PDF_PATH}
 .PHONY: clean
 clean:
 	@rm -rf "${BUILD_DIRECTORY}"
+	@rm -rf "${SETUP_DIRECTORY}"
 	@rm -rf node_modules
 	@rm -f Brewfile.lock.json
 
