@@ -2,7 +2,7 @@
 
 This repository contains a simple `Node.js` application designed to automate printing of an HTML resume to PDF (using the excellent [Puppeteer package](https://github.com/puppeteer/puppeteer)), along with a [`Makefile`](Makefile) so you can just run `make` and have your HTML resume printed automatically. I fully realize that this is pretty excessive, but I got extremely tired of having to launch a browser, load or refresh my resume, print it to PDF, and then open it in yet another program just to see if my formatting or content changes came out the way I wanted. I'm also an automation enthusiast, and this was a chance to exercise those muscles a little.
 
-There's no reason you couldn't use this to print other things, but I've made some assumptions on formatting and number of pages that are really designed to
+There's no reason you couldn't use this to print other things, but I've made some assumptions on formatting and number of pages that are really designed just for printing a single-page document where the bottom margin should be slightly larger than the others (to visually balance with the normal large and space-filled header of a resume).
 
 
 ## Quick-start ##
