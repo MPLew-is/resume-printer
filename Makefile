@@ -3,19 +3,21 @@
 default: build
 
 
+# Determine which command to use to open the resulting PDF and the Homebrew prefix path based on the OS being used.
+# Note that spaces are used below instead of tabs to force `make` to treat the line as a variable definition, rather than rules to build a target.
+ifeq ($(shell uname), Linux)
+    OPEN        := xdg-open
+    BREW_PREFIX := /home/linuxbrew/.linuxbrew/bin
+else
+    OPEN        := open
+    BREW_PREFIX := /usr/local/bin
+endif
+
 # Set some variables for locations of dependencies, providing defaults if not found.
 # This allows an existing installation to be re-used without attempting to install via Homebrew, but still provides a non-empty value (that won't exist) if the dependency isn't available, which allows for rules to install the dependencies (`make` ignores empty-string dependencies).
 # Note that a recursively-expanded variable is used here (`=`) to only actually shell out when needed.
-BREW = $(shell which brew || echo "/usr/local/bin/brew")
-NPM  = $(shell which npm  || echo "/usr/local/bin/npm")
-
-# Determine which OS-specific command to use to open the resulting PDF.
-# Note that spaces are used below instead of tabs to force `make` to treat the line as a variable definition, rather than rules to build a target.
-ifeq ($(shell uname), Linux)
-    OPEN = xdg-open
-else
-    OPEN = open
-endif
+BREW = $(shell which brew || echo "${BREW_PREFIX}/brew")
+NPM  = $(shell which npm  || echo "${BREW_PREFIX}/npm")
 
 
 # Centralize some common definitions.
